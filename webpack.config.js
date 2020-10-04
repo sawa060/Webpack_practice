@@ -9,10 +9,19 @@ module.exports = {
 	entry: "./src/javascripts/main.js",
 	output: {
 		path: path.resolve(__dirname, "./dist"),
-		filename: "javascripts/main.js" // 出力されるファイル名
+		filename: "javascripts/[name]-[hash].js" // 出力されるファイル名
 	},
 	module: {
-		rules: [
+    rules: [
+      {
+        test: /\.(ts|tsx)/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader'
+          }
+        ]
+      },
 			{
 				test: /\.js/,
 				exclude: "/node_modules/",
@@ -52,7 +61,7 @@ module.exports = {
 						loader: "file-loader",
 						options: {
 							esModule: false,
-							name: "images/[name].[ext]"
+							name: "images/[name]-[hash].[ext]"
 						}
           },
           {
@@ -84,7 +93,7 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: "./stylesheets/main.css"
+			filename: "./stylesheets/[name]-[hash].css"
 		}),
 		new HtmlWebpackPlugin({
 			template: "./src/templates/index.pug",

@@ -1,10 +1,13 @@
 import ReactDom from 'react-dom'
 import * as React from 'react'
 
+import Alert from './alert.tsx'
+
 const App = props => {
   return (
     <div>
-      Hello, React
+      Hello, React!!
+      <Alert message="Success!!" />
     </div>
   )
 }
